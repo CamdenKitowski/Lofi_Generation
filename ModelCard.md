@@ -1,40 +1,31 @@
----
-# For reference on model card metadata, see the spec: https://github.com/huggingface/hub-docs/blob/main/modelcard.md?plain=1
-# Doc / guide: https://huggingface.co/docs/hub/model-cards
-{{ card_data }}
----
-
 # Model Card for LofiGen
 This model is trained on amplitude data from lofi beats and is then tasked with predicting the
 next amplitude value given a context of amplitude. Ultimately, once the model is done training,
 it is able to generate its own audio and thus new music.
-
-
 
 ## Model Details
 
 ### Model Description
 
 The model is 4-6 layers of 1d convolutional kernels. There are 2 important aspects
-that differentiate kernel layers. 
+that differentiate kernel layers.
 The first is channels of each layer. The first half
 of the layers gradually increase in channel size. For example, the first 1dConv layer
-grows from 1 to 16 channels and the second 1dConv layer grows from 16 to 64 channels. 
-This gradual increase is very similar to the model in WavNet where channels are increasing.
-The second half of the layers gradually decrease in channel size. For example the last 
+grows from 1 to 16 channels and the second 1dConv layer grows from 16 to 64 channels.
+This gradual increase is very similar to the model in WaveNet where channels are increasing.
+The second half of the layers gradually decrease in channel size. For example the last
 1dConv layer shrinks from 16 to 1 channel. This is the opposite of the first layer because
-allowing for the output dimensions to match the input dimensions. 
+allowing for the output dimensions to match the input dimensions.
 The second is kernel size. As we go into higher channel spaces, we increase the kernel
 size in order to gain more interesting information about our amplitudes over longer
 time periods. For example, in our first layer our kernel size is 128, but in our second
-layer our kernel size is 256. Similar to the matching increase and decrease in channel size, 
+layer our kernel size is 256. Similar to the matching increase and decrease in channel size,
 for our kernel size the last layer matches the first layer, second layer matches second to last
-layer, etc. 
+layer, etc.
 
 
-- **Developed by:** Suket Shah and Camden Kitowski 
+- **Developed by:** Suket Shah and Camden Kitowski
 - **Model type:** 1D Autoregressive Convolutional Neural Network
-- **Language(s) (NLP):** Python
 - **License:** No License
 
 ### Model Sources [optional]
@@ -82,8 +73,9 @@ Real-time live performance: Due to the nature of the model's prediction process 
 ## Bias, Risks, and Limitations
 
 <!-- This section is meant to convey both technical and sociotechnical limitations. -->
-Some biases risks and limitations with LofiGen include. 
-raining data bias: If the training data used to develop the model is not diverse or representative of various lofi styles and subgenres, the generated music might reflect the biases present in the data, leading to a limited range of creative output.
+Some biases risks and limitations with LofiGen include training data bias:
+
+If the training data used to develop the model is not diverse or representative of various lofi styles and subgenres, the generated music might reflect the biases present in the data, leading to a limited range of creative output.
 
 Cultural bias: If the training data is predominantly from one cultural background or region, the generated music may lack the richness and diversity found in lofi music from various cultures and traditions, potentially perpetuating stereotypes or underrepresenting certain styles.
 
@@ -118,19 +110,15 @@ Collaborative approach: Encourage users to view LofiGen as a tool that supports 
 Explore model improvements: Continuously research and develop model improvements to address technical limitations, enhance the quality of the generated music, and expand the model's capabilities to cater to a wider range of use cases and applications.
 ## How to Get Started with the Model
 
-Use the code below to get started with the model.
-TODO: INCLUDE CODE
+Use the code below to get started with the model:
 
-{{ get_started_code | default("[More Information Needed]", true)}}
+https://github.com/CamdenKitowski/Lofi_Generation
 
 ## Training Details
 
 ### Training Data
 
-<!-- This should link to a Data Card, perhaps with a short stub of information on what the training data is all about as well as documentation related to data pre-processing or additional filtering. -->
-TODO: LINK TO CAMDEN'S DATA CARD
-
-{{ training_data | default("[More Information Needed]", true)}}
+Training Card is included in the Github Repo as well.
 
 ### Training Procedure
 
@@ -157,7 +145,7 @@ By closely aligning the training procedure with the technical specifications, Lo
 
 #### Training Hyperparameters
 
-We trained hyperparameters via manual testing. Mainly, we changed the hyperparameter of 
+We trained hyperparameters via manual testing. Mainly, we changed the hyperparameter of
 learning rate from .01 all the way down to .0001 which is the current training learning rate.
 
 ## Evaluation
@@ -189,30 +177,22 @@ By focusing on the MSE evaluation protocol and analyzing the results, the LofiGe
 
 ### Testing Data, Factors & Metrics
 
-#### Testing Data
-
-<!-- This should link to a Data Card if possible. -->
-TODO: INCLUDE THIS IN THE MODEL CARD
-
 #### Factors
 
 <!-- These are the things the evaluation is disaggregating by, e.g., subpopulations or domains. -->
-We did not create any subpopulations or domains. The only factors we tested by was different 
-genres for experiment 2. 
+We did not create any subpopulations or domains. The only factors we tested by was different
+genres for experiment 2.
 
 #### Metrics
 
 <!-- These are the evaluation metrics being used, ideally with a description of why. -->
 
-There were 2 evaluation metrics we used. The first was the MSE Loss which is described above. The second is the auditory output that is generated from our models. This auditory output is subjectively measured while the MSE loss is objective. 
+There were 2 evaluation metrics we used. The first was the MSE Loss which is described above. The second is the auditory output that is generated from our models. This auditory output is subjectively measured while the MSE loss is objective.
 
 ### Results
 
-TODO: once we get results. 
+All of our results are outlined in the paper attached with this project.
 
-#### Summary
-
-TODO: Once we get results. 
 
 ## Environmental Impact
 
@@ -220,7 +200,7 @@ TODO: Once we get results.
 
 Carbon emissions can be estimated using the [Machine Learning Impact calculator](https://mlco2.github.io/impact#compute) presented in [Lacoste et al. (2019)](https://arxiv.org/abs/1910.09700).
 
-- **Hardware Type:** TODO: Ask Cameron
+- **Hardware Type:** NVIDIA GeForce RTX 2080 Super GPU
 - **Hours used:** 12 hours
 - **Cloud Provider:** None. Personal Infrastructure
 - **Carbon Emitted:** 1.3 kg C)2
