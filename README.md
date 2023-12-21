@@ -1,3 +1,3 @@
 # Lofi_Generation
 
-Please reference model card for details
+Please reference model card for details.
